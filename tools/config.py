@@ -53,13 +53,6 @@ DATA["FIXEDPOINT"] = {
         "help": "Tries to use fix point aritmetric. If no module is using it, it reduces the code size dramaticly. EXPERIMENTAL",
 }
 
-DATA["PS_USELOWPOWER"] = {
-        "name": "Low power mode for PS",
-        "depends": [],
-        "default": False,
-        "help": "Use triggered pressure reading for pressure sensor. Should have higher resolution and lower power consumption. EXPERIMENTAL",
-}
-
 DATA["THIS_DEVICE_ADDRESS"] = {
         "name": "Hardware address",
         "type": "text",

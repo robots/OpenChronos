@@ -134,11 +134,8 @@ void ps_init(void)
 // *************************************************************************************************
 void ps_start(void)
 {
-#ifdef PS_USELOWPOWER
-#else
 	// Start sampling data in ultra low power mode 
 	ps_write_register(0x03, 0x0B);  
-#endif
 }
 
 
@@ -398,12 +395,6 @@ u16 ps_read_register(u8 address, u8 mode)
 u32 ps_get_pa(void)
 {
 	volatile u32 data = 0;
-#ifdef PS_USELOWPOWER
-	// do a one time conversion
-	ps_write_register(0x03, 0x0C);
-	// wait for data to be available
-	while(ps_read_register(0x04, PS_TWI_8BIT_ACCESS)) Timer0_A4_Delay(CONV_MS_TO_TICKS(10));
-#endif
 	
 	// Get 3 MSB from DATARD8 register
 	data = ps_read_register(0x7F, PS_TWI_8BIT_ACCESS);
