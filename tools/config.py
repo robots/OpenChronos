@@ -144,6 +144,11 @@ DATA["CONFIG_PROUT"] = {
         "depends": [],
         "default": False}
 
+DATA["CONFIG_GATE"] = {
+        "name": "Gate opener",
+        "depends": [],
+        "default": False}
+
 
 DATA["CONFIG_SIDEREAL"] = {
         "name": "Sidereal Time Clock",

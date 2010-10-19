@@ -92,6 +92,10 @@
 #include "strength.h"
 #endif
 
+#ifdef CONFIG_GATE
+#include "gate.h"
+#endif
+
 // *************************************************************************************************
 // Defines section
 #define FUNCTION(function)  function
@@ -181,6 +185,8 @@ const struct menu menu_L1_Sidereal =
 	FUNCTION(update_sidereal),	// new display data
 };
 #endif
+
+
 
 // Line1 - Alarm
 const struct menu menu_L1_Alarm =
@@ -370,6 +376,20 @@ const struct menu menu_L2_Prout =
 };
 #endif
 
+#ifdef CONFIG_GATE
+// Line2 - GATE
+const struct menu menu_L2_Gate =
+{
+	FUNCTION(sx_gate),				// direct function
+	FUNCTION(mx_gate),				// sub menu function
+	FUNCTION(menu_skip_next),		// next item function
+	FUNCTION(display_gate),		// display function
+	FUNCTION(update_time),			// new display data
+};
+
+#endif
+
+
 #ifdef CONFIG_STRENGTH
 // Line1 - Kieser Training timer
 const struct menu menu_L1_Strength =
@@ -433,6 +453,9 @@ const struct menu *menu_L2[]={
 	&menu_L2_RFBSL,
 	#ifdef CONFIG_PROUT
 	&menu_L2_Prout,
+	#endif	
+	#ifdef CONFIG_GATE
+	&menu_L2_Gate,
 	#endif	
 };
 

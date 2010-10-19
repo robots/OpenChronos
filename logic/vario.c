@@ -85,9 +85,9 @@ void vario_tick()
   if (is_altitude_measurement()){
     hist_add(sAlt.altitude);
     if (!hist_ready()){
-        display_symbol(LCD_ICON_RECORD, SEG_ON_BLINK_ON);
+        display_symbol(LCD_ICON_RECORD, SEG_ON);
     } else {
-        display_symbol(LCD_ICON_RECORD, SEG_OFF);
+        display_symbol(LCD_ICON_RECORD, SEG_ON_BLINK_ON);
     }
   }
   display_vario(0, 0);
@@ -111,10 +111,8 @@ void start_vario()
   
 	
   if(fast) {
-	display_chars(LCD_SEG_L2_5_0, (u8*) "  FAST", SEG_ON);
 	ps_start_fast();
     } else {
-	display_chars(LCD_SEG_L2_5_0, (u8*) "  SLOW", SEG_ON);
 	ps_start();
     }
 
@@ -152,7 +150,12 @@ void display_vario(u8 line, u8 update)
   if (svario.state == VARIO_STOP) {
     display_chars(LCD_SEG_L2_5_0, (u8*) " VARIO", SEG_ON);
   } else if (is_altitude_measurement()){
-    if (hist_ready()) {
+    if (!hist_ready()) {
+	if(fast)
+    	    display_chars(LCD_SEG_L2_5_0, (u8*) "  FAST", SEG_ON);
+	else
+    	    display_chars(LCD_SEG_L2_5_0, (u8*) "  SLOW", SEG_ON);
+    } else {
       u8 *str;
 
       s16 diff = HIST_GET_OLD() - HIST_GET_NEW();
@@ -209,6 +212,7 @@ void reset_vario(void)
 {
   svario.state = VARIO_STOP;
   svario.hist_pos = svario.hist_count = 0;
+  display_symbol(LCD_ICON_RECORD, SEG_OFF);
 }
 
 #endif /* CONFIG_VARIO */
