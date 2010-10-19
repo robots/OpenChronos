@@ -138,6 +138,17 @@ void ps_start(void)
 	ps_write_register(0x03, 0x0B);  
 }
 
+// *************************************************************************************************
+// @fn          ps_start_fast
+// @brief       Init pressure sensor registers and start sampling in high speed mode
+// @param       none
+// @return      u8		1=Sensor started, 0=Sensor did not start
+// *************************************************************************************************
+void ps_start_fast(void)
+{
+	// Start sampling data in ultra low power mode 
+	ps_write_register(0x03, 0x09);  
+}
 
 
 // *************************************************************************************************

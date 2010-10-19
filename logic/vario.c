@@ -102,22 +102,32 @@ void update_vario()
 {
 }
 
+static u8 fast = 0;
+
 void start_vario()
 {
-
+  fast = !fast;
   svario.state = VARIO_RUN;
+  
 	
-  display_symbol(LCD_ICON_HEART, SEG_ON_BLINK_ON);
+  if(fast) {
+	display_chars(LCD_SEG_L2_5_0, (u8*) "  FAST", SEG_ON);
+	ps_start_fast();
+    } else {
+	display_chars(LCD_SEG_L2_5_0, (u8*) "  SLOW", SEG_ON);
+	ps_start();
+    }
+
 }
 
 void stop_vario()
 {
-  svario.state = VARIO_STOP;
-	
   display_symbol(LCD_ICON_HEART, SEG_OFF);
+  reset_vario();
 
   // Call draw routine immediately
   display_vario(LINE2, DISPLAY_LINE_UPDATE_FULL);
+  if(is_altitude_measurement()) ps_start(); // restore low power mode
 }
 
 void sx_vario(u8 line)
@@ -140,11 +150,9 @@ void display_vario(u8 line, u8 update)
 {
 
   if (svario.state == VARIO_STOP) {
-    display_chars(LCD_SEG_L2_5_0, (u8*) " idle", SEG_ON);
+    display_chars(LCD_SEG_L2_5_0, (u8*) " VARIO", SEG_ON);
   } else if (is_altitude_measurement()){
-    if (!hist_ready()) {
-      display_chars(LCD_SEG_L2_5_0, (u8*)" wait", SEG_ON_BLINK_ON);
-    } else {
+    if (hist_ready()) {
       u8 *str;
 
       s16 diff = HIST_GET_OLD() - HIST_GET_NEW();

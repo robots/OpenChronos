@@ -44,6 +44,7 @@
 // Prototypes section
 extern void ps_init(void);
 extern void ps_start(void);
+extern void ps_start_fast(void);
 extern void ps_stop(void);
 extern u32 ps_get_pa(void);
 extern u16 ps_get_temp(void);
