@@ -149,6 +149,11 @@ DATA["CONFIG_GATE"] = {
         "depends": [],
         "default": False}
 
+DATA["CONFIG_WEATHER"] = {
+        "name": "Weather forecast",
+        "depends": [],
+        "default": False}
+
 
 DATA["CONFIG_SIDEREAL"] = {
         "name": "Sidereal Time Clock",

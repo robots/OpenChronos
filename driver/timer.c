@@ -371,9 +371,9 @@ __interrupt void TIMER0_A0_ISR(void)
         if (is_prout()) prout_tick();
 #endif
 
-#ifdef CONFIG_VARIO
-        if(is_vario()) vario_tick();
-#endif
+//#ifdef CONFIG_VARIO
+//        if(is_vario()) vario_tick();
+//#endif
 
 #ifdef CONFIG_STRENGTH
         // One more second gone by.

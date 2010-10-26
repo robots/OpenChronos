@@ -96,6 +96,10 @@
 #include "gate.h"
 #endif
 
+#ifdef CONFIG_WEATHER
+#include "weather.h"
+#endif
+
 // *************************************************************************************************
 // Defines section
 #define FUNCTION(function)  function
@@ -389,6 +393,19 @@ const struct menu menu_L2_Gate =
 
 #endif
 
+#ifdef CONFIG_WEATHER
+// Line2 - GATE
+const struct menu menu_L2_Weather =
+{
+	FUNCTION(sx_weather),				// direct function
+	FUNCTION(mx_weather),				// sub menu function
+	FUNCTION(menu_skip_next),		// next item function
+	FUNCTION(display_weather),		// display function
+	FUNCTION(update_weather),			// new display data
+};
+
+#endif
+
 
 #ifdef CONFIG_STRENGTH
 // Line1 - Kieser Training timer
@@ -442,6 +459,12 @@ const struct menu *menu_L2[]={
 	#ifdef CONFIG_PHASE_CLOCK
 	&menu_L2_Phase,
 	#endif
+	#ifdef CONFIG_GATE
+	&menu_L2_Gate,
+	#endif	
+	#ifdef CONFIG_WEATHER
+	&menu_L2_Weather,
+	#endif	
 	#ifdef CONFIG_ACCEL
 	&menu_L2_Rf,
 	#endif
@@ -453,9 +476,6 @@ const struct menu *menu_L2[]={
 	&menu_L2_RFBSL,
 	#ifdef CONFIG_PROUT
 	&menu_L2_Prout,
-	#endif	
-	#ifdef CONFIG_GATE
-	&menu_L2_Gate,
 	#endif	
 };
 

@@ -250,6 +250,9 @@ void do_altitude_measurement(u8 filter)
 #else
     sAlt.altitude = conv_pa_to_meter(sAlt.pressure, sAlt.temperature);
 #endif
+#ifdef CONFIG_VARIO
+    if(is_vario()) vario_tick();
+#endif
 }
 
 
