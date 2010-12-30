@@ -217,8 +217,14 @@ DATA["CONFIG_TEMP"] = {
         "name": "Temperature",
         "depends": [],
         "default": True}
-
-
+DATA["CONFIG_USE_DISCRET_RFBSL"] = {
+        "name": "RFBSL is hidden behind battery",
+        "depends": [],
+        "default": True}
+DATA["CONFIG_USEPPT"] = {
+        "name": "Use PPT",
+        "depends": [],
+        "default": True}
 
 HEADER = """
 #ifndef _CONFIG_H_

@@ -128,11 +128,13 @@ void sx_rfbsl(u8 line)
 // @param       line		LINE1, LINE2
 // @return      none
 // *************************************************************************************************
+#ifndef CONFIG_USE_DISCRET_RFBSL
 void nx_rfbsl(u8 line)
 {
 	locked = 1;
 	menu_skip_next(line);
 }
+#endif
 
 
 // *************************************************************************************************

@@ -108,13 +108,13 @@ void start_vario()
 {
   fast = !fast;
   svario.state = VARIO_RUN;
-  
-	
+
+
   if(fast) {
-	ps_start_fast();
-    } else {
-	ps_start();
-    }
+   ps_start_fast();
+  } else {
+   ps_start();
+  }
 
 }
 
@@ -151,10 +151,10 @@ void display_vario(u8 line, u8 update)
     display_chars(LCD_SEG_L2_5_0, (u8*) " VARIO", SEG_ON);
   } else if (is_altitude_measurement()){
     if (!hist_ready()) {
-	if(fast)
-    	    display_chars(LCD_SEG_L2_5_0, (u8*) "  FAST", SEG_ON);
-	else
-    	    display_chars(LCD_SEG_L2_5_0, (u8*) "  SLOW", SEG_ON);
+      if(fast)
+        display_chars(LCD_SEG_L2_5_0, (u8*) "  FAST", SEG_ON);
+          else
+        display_chars(LCD_SEG_L2_5_0, (u8*) "  SLOW", SEG_ON);
     } else {
       u8 *str;
 

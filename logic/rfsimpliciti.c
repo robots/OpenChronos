@@ -175,6 +175,7 @@ void sx_rf(u8 line)
 // @param       u8 line		LINE2
 // @return      none
 // *************************************************************************************************
+#ifdef CONFIG_USEPPT
 void sx_ppt(u8 line)
 {
 	// Exit if battery voltage is too low for radio operation
@@ -189,6 +190,7 @@ void sx_ppt(u8 line)
   	// Start SimpliciTI in tx only mode
 	start_simpliciti_tx_only(SIMPLICITI_BUTTONS);
 }
+#endif
 
 
 // *************************************************************************************************
@@ -346,6 +348,7 @@ void display_rf(u8 line, u8 update)
 //				u8 update		DISPLAY_LINE_UPDATE_FULL
 // @return      none
 // *************************************************************************************************
+#ifdef CONFIG_USEPPT
 void display_ppt(u8 line, u8 update)
 {
 	if (update == DISPLAY_LINE_UPDATE_FULL)	
@@ -353,6 +356,7 @@ void display_ppt(u8 line, u8 update)
 		display_chars(LCD_SEG_L2_5_0, (u8 *)"   PPT", SEG_ON);
 	}
 }
+#endif
 
 
 // *************************************************************************************************

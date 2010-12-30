@@ -300,8 +300,13 @@ const struct menu menu_L2_Eggtimer =
 // Line2 - Battery 
 const struct menu menu_L2_Battery =
 {
+  #ifndef CONFIG_USE_DISCRET_RFBSL
 	FUNCTION(dummy),					// direct function
 	FUNCTION(dummy),					// sub menu function
+	#else
+	FUNCTION(sx_rfbsl),				// direct function
+	FUNCTION(mx_rfbsl),				// sub menu function
+	#endif
 	FUNCTION(menu_skip_next),			// next item function
 	FUNCTION(display_battery_V),		// display function
 	FUNCTION(update_battery_voltage),	// new display data
@@ -328,6 +333,7 @@ const struct menu menu_L2_Rf =
 	FUNCTION(update_time),			// new display data
 };
 #endif
+#ifdef CONFIG_USEPPT
 // Line2 - PPT (button events via SimpliciTI)
 const struct menu menu_L2_Ppt =
 {
@@ -337,6 +343,7 @@ const struct menu menu_L2_Ppt =
 	FUNCTION(display_ppt),			// display function
 	FUNCTION(update_time),			// new display data
 };
+#endif
 // Line2 - SXNC (synchronization/data download via SimpliciTI)
 const struct menu menu_L2_Sync =
 {
@@ -355,9 +362,9 @@ const struct menu menu_L2_CalDist =
 	FUNCTION(menu_skip_next),		// next item function
 	FUNCTION(display_caldist),		// display function
 	FUNCTION(update_time),			// new display data
-	&menu_L2_RFBSL,
 };
 #endif
+#ifndef CONFIG_USE_DISCRET_RFBSL
 // Line2 - RFBSL
 const struct menu menu_L2_RFBSL =
 {
@@ -367,7 +374,7 @@ const struct menu menu_L2_RFBSL =
 	FUNCTION(display_rfbsl),		// display function
 	FUNCTION(update_time),			// new display data
 };
-
+#endif
 #ifdef CONFIG_PROUT
 // Line2 - PROUT
 const struct menu menu_L2_Prout =
@@ -468,12 +475,16 @@ const struct menu *menu_L2[]={
 	#ifdef CONFIG_ACCEL
 	&menu_L2_Rf,
 	#endif
+	#ifdef CONFIG_USEPPT
 	&menu_L2_Ppt,
+	#endif
 	&menu_L2_Sync,
 	#ifndef ELIMINATE_BLUEROBIN
 	&menu_L2_CalDist,
 	#endif
+	#ifndef CONFIG_USE_DISCRET_RFBSL
 	&menu_L2_RFBSL,
+	#endif
 	#ifdef CONFIG_PROUT
 	&menu_L2_Prout,
 	#endif	
